@@ -2,10 +2,10 @@ name: Lint
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
   workflow_dispatch:
 
@@ -58,6 +58,23 @@ jobs:
         env:
           SOURCES: >
             01-Logos
+
+  lint-kebab-file:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        path:
+          - 01-Logos
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Lint Image filenames (kebab-case)
+        uses: julie-ng/lowercase-linter@v1
+        with:
+          path: ${{ matrix.path }}
+
   lint-yaml:
     runs-on: ubuntu-22.04
     steps:
