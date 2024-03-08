@@ -33,6 +33,31 @@ jobs:
         with:
           args: "**/*.md"
 
+  lint-duplicate-file:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install fdupes 2.2.1
+        run: sudo apt-get update && sudo apt-get install -y fdupes=1:2.1.2-1build1
+
+      - name: Check for duplicate files
+        run: |
+          IFS=' ' read -ra FOLDERS <<< "$SOURCES"
+          DUPLICATE_FILES=$(fdupes -r "${FOLDERS[@]}")
+          if [ -n "$DUPLICATE_FILES" ]; then
+              echo -e "❌ Duplicate files found:\n" >&2
+              echo "$DUPLICATE_FILES" >&2
+              echo -e "\nPlease remove duplicates 🙏" >&2
+              exit 1
+          else
+              echo "✅ No duplicate files found."
+          fi
+
+        env:
+          SOURCES: >
+            01-Logos
   lint-yaml:
     runs-on: ubuntu-22.04
     steps:
