@@ -15,7 +15,7 @@ jobs:
     if: github.actor != 'dependabot[bot]'
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Lint markdown files
         uses: avto-dev/markdown-lint@v1.5.0
@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Install fdupes 2.2.1
         run: sudo apt-get update && sudo apt-get install -y fdupes=1:2.1.2-1build1
@@ -68,7 +68,7 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Lint Image filenames (kebab-case)
         uses: julie-ng/lowercase-linter@v1
@@ -79,7 +79,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Lint yaml files
         uses: ibiqlik/action-yamllint@v3.1.1
